@@ -1,0 +1,9 @@
+uvicorn==0.22.0
+fastapi==0.103.1
+langchain==0.0.324
+neo4j
+sentence-transformers==2.2.2
+huggingface-hub==0.11.1
+torch==2.0.1
+PyPDF2
+openai==0.28.1
