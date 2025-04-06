@@ -42,10 +42,10 @@ logger.info(f"Configured Ollama Base URL: {OLLAMA_BASE_URL}")
 # Example: Create these files even if they are empty for now
 # from app.api import auth, admin, professor, student # Create these python files in app/api/
 
-# app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
-# app.include_router(admin.router, prefix="/admin", tags=["Admin"])
-# app.include_router(professor.router, prefix="/professor", tags=["Professor"])
-# app.include_router(student.router, prefix="/student", tags=["Student"])
+app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
+app.include_router(admin.router, prefix="/admin", tags=["Admin"])
+app.include_router(professor.router, prefix="/professor", tags=["Professor"])
+app.include_router(student.router, prefix="/student", tags=["Student"])
 
 # --- Basic Root Endpoint ---
 @app.get("/")
