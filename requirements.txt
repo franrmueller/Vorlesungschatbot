@@ -1,4 +1,5 @@
-streamlit
+uvicorn==0.22.0
+fastapi==0.103.1
 langchain==0.0.324
 neo4j
 sentence-transformers==2.2.2

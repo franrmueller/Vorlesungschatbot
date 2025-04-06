@@ -14,7 +14,7 @@ from langchain.prompts.chat import (
     HumanMessagePromptTemplate,
 )
 from typing import List, Any
-from utils import BaseLogger, extract_title_and_question
+from app.core.utils import BaseLogger, extract_title_and_question
 
 
 def load_embedding_model(embedding_model_name: str, logger=BaseLogger(), config={}):

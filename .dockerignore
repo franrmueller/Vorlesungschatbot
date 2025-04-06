@@ -4,6 +4,24 @@
 # For more help, visit the .dockerignore file reference guide at
 # https://docs.docker.com/go/build-context-dockerignore/
 
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+
+# Virtual environment
+venv/
+.venv/
+env/
+.env/
+
+# OS / Editor specific
+.DS_Store
+.vscode/
+
 **/.DS_Store
 **/__pycache__
 **/.venv
