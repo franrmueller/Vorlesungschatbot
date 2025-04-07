@@ -133,15 +133,15 @@ app/
 
 │ └── student/ # Student-specific views 
 
-│ └── chat.html # Student chat interface 
+│ └── chat.html # Chat interface 
 
 └── static/ 
 
-  ├── css/ # Stylesheets 
+│  ├── css/ # Stylesheets 
 
-  ├── js/ # JavaScript files 
+│ ├── js/ # JavaScript files 
 
-  └── images/ # Static images
+│  └── images/ # Static images
   
 
 JavaScript is used to enhance the templates with dynamic features like real-time chat interactions.
@@ -153,7 +153,6 @@ JavaScript is used to enhance the templates with dynamic features like real-time
 - Feedback (thumbs up/down) on answers.
 - Advanced retrieval (e.g., HyDE, query rewriting).
 - Graph-native queries (e.g., "How many documents in Class X?").
-- Asynchronous PDF processing with task queues (Celery, RQ).
 - Enhanced UI/UX.
 - Multi-modal support (e.g., querying images in PDFs).
 - Document/class summarization.
