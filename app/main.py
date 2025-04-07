@@ -22,10 +22,6 @@ os.environ["NEO4J_URL"] = url
 
 logger = get_logger(__name__)
 
-embeddings, dimension = load_embedding_model(
-    embedding_model_name, config={"ollama_base_url": ollama_base_url}, logger=logger
-)
-
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
