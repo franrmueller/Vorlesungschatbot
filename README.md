@@ -137,11 +137,11 @@ app/
 
 └── static/ 
 
-├── css/ # Stylesheets 
+  ├── css/ # Stylesheets 
 
-├── js/ # JavaScript files 
+  ├── js/ # JavaScript files 
 
-└── images/ # Static images
+  └── images/ # Static images
 
 JavaScript is used to enhance the templates with dynamic features like real-time chat interactions.
 
