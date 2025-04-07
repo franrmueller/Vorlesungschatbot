@@ -85,8 +85,7 @@ Students often struggle to find specific information within extensive course mat
 - **Database**: ![Neo4j](https://img.shields.io/badge/Neo4j-Yes-green) (Graph + Vector Index)
 - **Backend**: ![FastAPI](https://img.shields.io/badge/FastAPI-Yes-green) (Python)
 - **Frontend**: ![JINJA2](https://img.shields.io/badge/JINJA2-Yes-green) + ![HTML/JS](https://img.shields.io/badge/HTML%2FJS-Yes-green)
-- **Containerization**: ![Docker][def] & ![Docker Compose][def]
-
+- **Containerizing**: ![Docker](https://img.shields.io/badge/Docker-Yes-green) & ![Docker Compose](https://img.shields.io/badge/Docker%20Compose-Yes-green)
 ## Database Schema
 
 ### Nodes
