@@ -3,7 +3,7 @@
 [English](#english) | [Deutsch](#deutsch)
 
 <a name="english"></a>
-# Classroom-Chatbot [English]
+# Classroom-Chatbot
 
 An AI-powered chatbot that empowers students to learn by asking questions directly about their course materials. Leveraging a modern RAG architecture with Neo4j, the chatbot provides contextually accurate answers based solely on documents uploaded by verified professors for specific classes.
 
@@ -79,20 +79,13 @@ Students often struggle to find specific information within extensive course mat
 - **Response**: Answer displayed with source PDF/page citations.
 
 ## Technology Stack
-- ![LangChain](https://img.shields.io/badge/LangChain-Yes-green)
-- ![Ollama](https://img.shields.io/badge/Ollama-Yes-green)
-- ![Neo4j](https://img.shields.io/badge/Neo4j-Yes-green)
-- ![FastAPI](https://img.shields.io/badge/FastAPI-Yes-green)
-- ![React](https://img.shields.io/badge/React-Yes-green)
-- ![Docker](https://img.shields.io/badge/Docker-Yes-green)
-
-- **Orchestration**: LangChain (Python)
-- **LLM Serving**: Ollama (Llama 2)
+- **Orchestration**: ![LangChain](https://img.shields.io/badge/LangChain-Yes-green) (Python)
+- **LLM Serving**: ![Ollama](https://img.shields.io/badge/Ollama-Yes-green) (Llama 2)
 - **Embedding Model**: Ollama or dedicated service
-- **Database**: Neo4j (Graph + Vector Index)
-- **Backend**: FastAPI (Python)
-- **Frontend**: Jinja2 + HTML/js
-- **Containerization**: Docker & Docker Compose
+- **Database**: ![Neo4j](https://img.shields.io/badge/Neo4j-Yes-green) (Graph + Vector Index)
+- **Backend**: ![FastAPI](https://img.shields.io/badge/FastAPI-Yes-green) (Python)
+- **Frontend**: ![JINJA2](https://img.shields.io/badge/HTML%2FJS-Yes-green) + ![HTML/JS](https://img.shields.io/badge/HTML%2FJS-Yes-green)
+- **Containerization**: ![Docker][def] & ![Docker Compose][def]
 
 ## Database Schema
 
@@ -267,21 +260,14 @@ Studierende haben oft Schwierigkeiten, bestimmte Informationen in umfangreichen 
 - **Antwort**: Antwort wird mit Quellen-PDF/Seitenzitaten angezeigt.
 
 <a name="technologie-stack"></a>
-## Technologie-Stack
-- ![LangChain](https://img.shields.io/badge/LangChain-Yes-green)
-- ![Ollama](https://img.shields.io/badge/Ollama-Yes-green)
-- ![Neo4j](https://img.shields.io/badge/Neo4j-Yes-green)
-- ![FastAPI](https://img.shields.io/badge/FastAPI-Yes-green)
-- ![React](https://img.shields.io/badge/React-Yes-green)
-- ![Docker](https://img.shields.io/badge/Docker-Yes-green)
-
-- **Orchestrierung**: LangChain (Python)
-- **LLM-Bereitstellung**: Ollama (Llama 2)
-- **Einbettungsmodell**: Ollama oder dedizierter Dienst
-- **Datenbank**: Neo4j (Graph + Vector Index)
-- **Backend**: FastAPI (Python)
-- **Frontend**: Jinja2 + HTML/js
-- **Containerisierung**: Docker & Docker Compose
+## Technology Stack
+- **Orchestrierung**: ![LangChain](https://img.shields.io/badge/LangChain-Yes-green) (Python)
+- **LLM Serving**: ![Ollama](https://img.shields.io/badge/Ollama-Yes-green) (Llama 2)
+- **Embedding Model**: Ollama or dedicated service
+- **Datenbank**: ![Neo4j](https://img.shields.io/badge/Neo4j-Yes-green) (Graph + Vector Index)
+- **Backend**: ![FastAPI](https://img.shields.io/badge/FastAPI-Yes-green) (Python)
+- **Frontend**: ![JINJA2](https://img.shields.io/badge/HTML%2FJS-Yes-green) + ![HTML/JS](https://img.shields.io/badge/HTML%2FJS-Yes-green)
+- **Containerisierung**: ![Docker][def] & ![Docker Compose][def]
 
 <a name="datenbankschema"></a>
 ## Datenbankschema
@@ -377,3 +363,5 @@ JavaScript wird verwendet, um die Templates mit dynamischen Funktionen wie Echtz
 <a name="lizenz"></a>
 ## Lizenz
 Siehe LICENSE-Datei für Details.
+
+[def]: https://img.shields.io/badge/Docker-Yes-green
