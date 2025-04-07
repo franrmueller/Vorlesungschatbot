@@ -2,6 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 import logging
 import os
+from app.api import auth
 
 # --- Configuration (Ideally move to app/core/config.py later) ---
 # Load essential config needed at startup (example)
@@ -43,9 +44,9 @@ logger.info(f"Configured Ollama Base URL: {OLLAMA_BASE_URL}")
 # from app.api import auth, admin, professor, student # Create these python files in app/api/
 
 app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
-app.include_router(admin.router, prefix="/admin", tags=["Admin"])
-app.include_router(professor.router, prefix="/professor", tags=["Professor"])
-app.include_router(student.router, prefix="/student", tags=["Student"])
+# app.include_router(admin.router, prefix="/admin", tags=["Admin"])
+# app.include_router(professor.router, prefix="/professor", tags=["Professor"])
+# app.include_router(student.router, prefix="/student", tags=["Student"])
 
 # --- Basic Root Endpoint ---
 @app.get("/")

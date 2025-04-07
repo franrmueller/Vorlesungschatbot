@@ -1,8 +1,8 @@
 # app/services/auth_service.py
 from neo4j import Driver
 from app.db.connect import get_driver
-from app.models import user as user_models
-from app.core import security
+from ..models import user as user_models
+from ..core import security
 import logging
 import uuid
 

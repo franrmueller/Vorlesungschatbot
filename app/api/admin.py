@@ -7,10 +7,10 @@ from fastapi import APIRouter, Depends, HTTPException, status
 router = APIRouter()
 
 # Dependency to check if the user is an admin (example)
-# async def get_current_admin_user(user: user_models.User = Depends(security.get_current_active_user)):
-#     if user.role != "ADMIN":
-#         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized")
-#     return user
+async def get_current_admin_user(user: user_models.User = Depends(security.get_current_active_user)):
+     if user.role != "ADMIN":
+         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized")
+     return user
 
 @router.get("/users")
 # async def list_all_users(admin: user_models.User = Depends(get_current_admin_user)):

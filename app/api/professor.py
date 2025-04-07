@@ -1,9 +1,9 @@
 # app/api/professor.py
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, Form
 # Import dependencies for authorization and services later
-# from app.core import security
-# from app.models import user as user_models, class_ as class_models
-# from app.services import class_service
+from app.core import security
+from app.models import user as user_models, class_ as class_models
+from app.services import class_service
 
 router = APIRouter()
 

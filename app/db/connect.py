@@ -5,9 +5,9 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-NEO4J_URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
+NEO4J_URI = os.getenv("NEO4J_URI", "neo4j+s://9b2392e0.databases.neo4j.io")
 NEO4J_USERNAME = os.getenv("NEO4J_USERNAME", "neo4j")
-NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "your_neo4j_password") # Use secure handling
+NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "md9_IcJYXDjAN70Tq_XWyzZBvwel4q35zVPeCJYb_mM")
 
 _driver = None
 
