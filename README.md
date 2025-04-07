@@ -261,13 +261,13 @@ Studierende haben oft Schwierigkeiten, bestimmte Informationen in umfangreichen 
 
 <a name="technologie-stack"></a>
 ## Technology Stack
-- **Orchestration**: ![LangChain](https://img.shields.io/badge/LangChain-Yes-green) (Python)
+- **Orchestrierung**: ![LangChain](https://img.shields.io/badge/LangChain-Yes-green) (Python)
 - **LLM Serving**: ![Ollama](https://img.shields.io/badge/Ollama-Yes-green) (Llama 2)
 - **Embedding Model**: Ollama or dedicated service
-- **Database**: ![Neo4j](https://img.shields.io/badge/Neo4j-Yes-green) (Graph + Vector Index)
+- **Datenbank**: ![Neo4j](https://img.shields.io/badge/Neo4j-Yes-green) (Graph + Vector Index)
 - **Backend**: ![FastAPI](https://img.shields.io/badge/FastAPI-Yes-green) (Python)
 - **Frontend**: ![JINJA2](https://img.shields.io/badge/HTML%2FJS-Yes-green) + ![HTML/JS](https://img.shields.io/badge/HTML%2FJS-Yes-green)
-- **Containerization**: ![Docker][def] & ![Docker Compose][def]
+- **Containerisierung**: ![Docker][def] & ![Docker Compose][def]
 
 <a name="datenbankschema"></a>
 ## Datenbankschema
