@@ -1,5 +1,10 @@
 # Classroom-Chatbot
 
+[English](#english) | [Deutsch](#deutsch)
+
+<a name="english"></a>
+# Classroom-Chatbot [English]
+
 An AI-powered chatbot that empowers students to learn by asking questions directly about their course materials. Leveraging a modern RAG architecture with Neo4j, the chatbot provides contextually accurate answers based solely on documents uploaded by verified professors for specific classes.
 
 ## Table of Contents
@@ -86,7 +91,7 @@ Students often struggle to find specific information within extensive course mat
 - **Embedding Model**: Ollama or dedicated service
 - **Database**: Neo4j (Graph + Vector Index)
 - **Backend**: FastAPI (Python)
-- **Frontend**: React/Vue or Jinja2/Thymeleaf
+- **Frontend**: Jinja2 + HTML/js
 - **Containerization**: Docker & Docker Compose
 
 ## Database Schema
@@ -178,3 +183,197 @@ JavaScript is used to enhance the templates with dynamic features like real-time
 
 ## License
 See the LICENSE file for details.
+
+---
+
+<a name="deutsch"></a>
+# Classroom-Chatbot [Deutsch]
+
+Ein KI-gestützter Chatbot, der Studierenden ermöglicht, durch direktes Stellen von Fragen zu ihren Kursmaterialien zu lernen. Mit einer modernen RAG-Architektur und Neo4j bietet der Chatbot kontextuell genaue Antworten, die ausschließlich auf Dokumenten basieren, die von verifizierten Professoren für bestimmte Kurse hochgeladen wurden.
+
+## Inhaltsverzeichnis
+- [Vision](#vision-de)
+- [Gelöstes Kernproblem](#gelöstes-kernproblem)
+- [Hauptfunktionen & Benutzerrollen](#hauptfunktionen--benutzerrollen)
+- [Kern-Chatbot-Funktionalität](#kern-chatbot-funktionalität)
+- [Technologie-Stack](#technologie-stack)
+- [Datenbankschema](#datenbankschema)
+- [Frontend-Implementierung](#frontend-implementierung)
+- [Mögliche Erweiterungen & Zukünftige Arbeiten](#mögliche-erweiterungen--zukünftige-arbeiten)
+- [Installation](#installation-de)
+- [Nutzung](#nutzung)
+- [Mitwirken](#mitwirken)
+- [Lizenz](#lizenz)
+
+<a name="vision-de"></a>
+## Vision
+Einen intuitiven und effizienten KI-gestützten Chatbot zu entwickeln, der Studierenden ermöglicht, durch direktes Stellen von Fragen zu ihren Kursmaterialien zu lernen. Mit einer modernen RAG-Architektur und Neo4j bietet der Chatbot kontextuell genaue Antworten, die ausschließlich auf Dokumenten basieren, die von verifizierten Professoren für bestimmte Kurse hochgeladen wurden.
+
+<a name="gelöstes-kernproblem"></a>
+## Gelöstes Kernproblem
+Studierende haben oft Schwierigkeiten, bestimmte Informationen in umfangreichen Kursmaterialien (PDFs) zu finden. Dieser Chatbot bietet eine interaktive Möglichkeit, diese Dokumente direkt abzufragen, spart Zeit und verbessert das Verständnis durch zielgerichtete Antworten auf Basis der bereitgestellten Inhalte.
+
+<a name="hauptfunktionen--benutzerrollen"></a>
+## Hauptfunktionen & Benutzerrollen
+
+### Benutzerrollen
+- **Administrator**: Systemverantwortlicher.
+- **Professor**: Inhaltsanbieter und Kursmanager.
+- **Student**: Inhaltsnutzer.
+
+### Authentifizierung & Autorisierung
+- Sichere Anmeldung für alle Rollen mit Passwörtern, die mit `bcrypt` gehasht werden.
+- Rollenbasierte Zugriffssteuerung (RBAC) durchgesetzt.
+- Selbstregistrierung für Studierende.
+- Admin/Professor-Konten werden über Setup-Skript oder Admin-Oberfläche erstellt.
+
+### Administrator-Ansicht
+- **Benutzerverwaltung**: Erstellung/Verwaltung von Professorenkonten; Einsehen/Verwalten von Studentenkonten (z.B. Deaktivieren, Löschen, Passwort zurücksetzen).
+- **Systemstruktur**: Erstellung/Anzeige/Löschung von Kursen; Zuweisung von Professoren zu Kursen (optional: Professoren erstellen ihre eigenen).
+- **Inhaltsaufsicht**: Anzeigen/Entfernen von hochgeladenen PDFs und zugehörigen Kursen bei Bedarf.
+
+### Professor-Ansicht
+- **Kursverwaltung**: Erstellung/Verwaltung ihrer Kurse.
+- **Inhaltsverwaltung**: Hochladen/Entfernen von PDFs für ihre spezifischen Kurse.
+- **Studentenverwaltung**: Anzeige eingeschriebener Studierender; ggf. Entfernung von Studierenden aus einem Kurs.
+- **Chatbot-Zugriff**: Testen des Chatbots im Rahmen ihrer Kurse.
+
+### Studierenden-Ansicht
+- **Einschreibung**: Beitritt zu Kursen mittels einzigartiger Codes von Professoren.
+- **Kursauswahl**: Anzeige und Auswahl eingeschriebener Kurse.
+- **Chatbot-Interaktion**: Stellen von Fragen, die ausschließlich aus Dokumenten des ausgewählten Kurses beantwortet werden, mit Anzeige der Quellinformationen (z.B. PDF-Name, Seitennummer).
+
+<a name="kern-chatbot-funktionalität"></a>
+## Kern-Chatbot-Funktionalität
+
+### 1. Dokumentenaufnahme & Indexierung (Professor-Upload)
+- **Upload**: Professoren laden PDFs hoch, die mit ihren Kursen verknüpft sind.
+- **Laden**: PDFs werden mit LangChain's `PyPDFLoader` verarbeitet.
+- **Chunking**: Text wird mit `Sentence-Transformers` in Chunks mit Überlappung aufgeteilt.
+- **Einbettung**: Vektor-Einbettungen werden über `OllamaEmbeddings` generiert.
+- **Speicherung (Neo4j)**:
+  - `PDF`-Knoten speichern Metadaten (Titel, Dateiname, Zeitstempel).
+  - `PdfChunk`-Knoten speichern Inhalt, Einbettungen und Metadaten (z.B. Seitennummer).
+  - Beziehungen: `(:Class)-[:HAS_DOCUMENT]->(:PDF)-[:HAS_CHUNK]->(:PdfChunk)`.
+- **Vektor-Indexierung**: Neo4j Vector Index auf `embedding_vector` für Ähnlichkeitssuche, gefiltert nach Kurs.
+
+### 2. Abfragenbearbeitung (Studierenden-Interaktion)
+- **Eingabe**: Studierende wählen einen Kurs aus und stellen eine Frage.
+- **Query-Einbettung**: Frage wird mit demselben Modell eingebettet.
+- **Abruf**:
+  - Vektor-Ähnlichkeitssuche in Neo4j, gefiltert auf die `PdfChunk`-Knoten des ausgewählten Kurses.
+  - Die relevantesten `k` Chunks werden mit Metadaten abgerufen.
+- **Generierung**: Prompt mit Frage und Kontext wird über `Chatollama` an `Llama 2` gesendet.
+- **Antwort**: Antwort wird mit Quellen-PDF/Seitenzitaten angezeigt.
+
+<a name="technologie-stack"></a>
+## Technologie-Stack
+- ![LangChain](https://img.shields.io/badge/LangChain-Yes-green)
+- ![Ollama](https://img.shields.io/badge/Ollama-Yes-green)
+- ![Neo4j](https://img.shields.io/badge/Neo4j-Yes-green)
+- ![FastAPI](https://img.shields.io/badge/FastAPI-Yes-green)
+- ![React](https://img.shields.io/badge/React-Yes-green)
+- ![Docker](https://img.shields.io/badge/Docker-Yes-green)
+
+- **Orchestrierung**: LangChain (Python)
+- **LLM-Bereitstellung**: Ollama (Llama 2)
+- **Einbettungsmodell**: Ollama oder dedizierter Dienst
+- **Datenbank**: Neo4j (Graph + Vector Index)
+- **Backend**: FastAPI (Python)
+- **Frontend**: Jinja2 + HTML/js
+- **Containerisierung**: Docker & Docker Compose
+
+<a name="datenbankschema"></a>
+## Datenbankschema
+
+### Knoten
+- `User {uuid, username, password_hash, name, role: ['ADMIN', 'PROFESSOR', 'STUDENT'], created_at}`
+- `Class {uuid, name, enrollment_code, created_at, created_by_uuid}`
+- `PDF {uuid, title, source_filename, upload_timestamp, uploaded_by_uuid}`
+- `PdfChunk {uuid, chunk_index, content, embedding_vector, source_page}`
+
+### Beziehungen
+- `(User {role:'PROFESSOR'})-[:TEACHES]->(:Class)`
+- `(User {role:'STUDENT'})-[:ENROLLED_IN {enrolled_at}]->(:Class)`
+- `(:Class)-[:HAS_DOCUMENT]->(:PDF)`
+- `(:PDF)-[:HAS_CHUNK]->(:PdfChunk)`
+- `(:PDF)-[:UPLOADED_BY]->(:User {role:'PROFESSOR'})`
+
+<a name="frontend-implementierung"></a>
+## Frontend-Implementierung
+
+Das Frontend wird mit Jinja2-Templates implementiert, die direkt in FastAPI integriert sind. Dieser Ansatz bietet:
+
+- **Server-seitiges Rendering**: Schnell ladende Seiten mit von FastAPI gerenderten Inhalten
+- **Einfache Struktur**: HTML-Templates mit eingebettetem JavaScript für Interaktivität
+- **Direkte Integration**: Templates werden direkt vom FastAPI-Backend bereitgestellt
+- **Rollenbasierte Benutzeroberfläche**: Unterschiedliche Ansichten für Studierende, Professoren und Administratoren
+
+Die Template-Struktur folgt dieser Organisation:
+
+app/
+
+├── templates/ 
+
+│ ├── base.html # Gemeinsame Layout-Vorlage 
+
+│ ├── index.html # Startseite 
+
+│ ├── login.html # Authentifizierungsseiten 
+
+│ ├── register.html 
+
+│ ├── admin/ # Admin-spezifische Ansichten 
+
+│ ├── professor/ # Professor-spezifische Ansichten 
+
+│ └── student/ # Studierenden-spezifische Ansichten 
+
+│ └── chat.html # Chat-Oberfläche 
+
+└── static/ 
+
+│  ├── css/ # Stylesheets 
+
+│ ├── js/ # JavaScript-Dateien 
+
+│  └── images/ # Statische Bilder
+  
+JavaScript wird verwendet, um die Templates mit dynamischen Funktionen wie Echtzeit-Chat-Interaktionen zu erweitern.
+
+<a name="mögliche-erweiterungen--zukünftige-arbeiten"></a>
+## Mögliche Erweiterungen & Zukünftige Arbeiten
+- Unterstützung für `.docx`, `.pptx`, `.txt`, URLs.
+- Chat-Verlauf pro Benutzer/Kurs.
+- Feedback (Daumen hoch/runter) zu Antworten.
+- Erweiterter Abruf (z.B. HyDE, Query-Umformulierung).
+- Graph-native Abfragen (z.B. "Wie viele Dokumente gibt es in Kurs X?").
+- Verbesserte UI/UX.
+- Multimodale Unterstützung (z.B. Abfrage von Bildern in PDFs).
+- Dokument-/Kurszusammenfassung.
+
+<a name="installation-de"></a>
+## Installation
+1. Klonen Sie das Repository:
+   ```bash
+   git clone https://github.com/your-username/classroom-chatbot.git
+2. Führen Sie Docker aus:
+   ```bash
+   docker compose up --build
+
+<a name="nutzung"></a>
+## Nutzung
+1. Greifen Sie auf die Weboberfläche unter http://localhost:8000 zu.
+3. Erstellen Sie einen Benutzer oder melden Sie sich mit Ihren Anmeldedaten an.
+
+<a name="mitwirken"></a>
+## Mitwirken
+1. Forken Sie das Repository.
+2. Erstellen Sie einen neuen Branch für Ihre Funktion.
+3. Commiten Sie Ihre Änderungen.
+4. Pushen Sie auf Ihren Branch.
+5. Öffnen Sie einen Pull Request.
+
+<a name="lizenz"></a>
+## Lizenz
+Siehe LICENSE-Datei für Details.
