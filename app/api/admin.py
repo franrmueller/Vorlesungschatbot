@@ -1,36 +1,70 @@
-# app/api/admin.py
-from fastapi import APIRouter, Depends, HTTPException, status
-# Import dependencies for authorization and services later
-# from app.core import security
-# from app.models import user as user_models
+import uvicorn
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+import logging
+import os
+from app.api import auth  # Import all routers
+from PyPDF2 import PdfReader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.callbacks.base import BaseCallbackHandler
+from langchain.vectorstores.neo4j_vector import Neo4jVector
+from streamlit.logger import get_logger
 
-router = APIRouter()
 
-# Dependency to check if the user is an admin (example)
-async def get_current_admin_user(user: user_models.User = Depends(security.get_current_active_user)):
-     if user.role != "ADMIN":
-         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized")
-     return user
+url = os.getenv("NEO4J_URI")
+username = os.getenv("NEO4J_USERNAME")
+password = os.getenv("NEO4J_PASSWORD")
+ollama_base_url = os.getenv("OLLAMA_BASE_URL")
+embedding_model_name = os.getenv("EMBEDDING_MODEL", "SentenceTransformer" )
+llm_name = os.getenv("LLM", "llama2")
+NEO4J_URI = os.getenv("NEO4J_URI")
 
-@router.get("/users")
-# async def list_all_users(admin: user_models.User = Depends(get_current_admin_user)):
-async def list_all_users():
-    """
-    Admin endpoint to list all users (or manage them).
-    Requires ADMIN role.
-    """
-    # TODO: Add dependency injection to verify user role is ADMIN
-    # TODO: Implement logic to fetch users from the database via a service
-    return {"message": "Admin: List users placeholder - requires ADMIN role"}
+os.environ["NEO4J_URL"] = url
 
-# Add other admin endpoints (e.g., create professor, manage classes overview)
-@router.post("/create_professor", status_code=status.HTTP_201_CREATED)
-# async def create_professor_user(professor_data: user_models.UserCreate, admin: user_models.User = Depends(get_current_admin_user)):
-async def create_professor_user():
-     """
-     Admin endpoint to create a new Professor user.
-     Requires ADMIN role.
-     """
-     # TODO: Add dependency injection to verify user role is ADMIN
-     # TODO: Implement logic to create a professor user
-     return {"message": "Admin: Create Professor placeholder - requires ADMIN role"}
+logger = get_logger(__name__)
+
+# Setup logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# --- FastAPI App Initialization ---
+# Create the FastAPI application instance
+app = FastAPI(
+    title="Classroom Chatbot API",
+    description="API endpoints for managing classes, documents, and chatting.",
+    version="0.1.0",
+)
+
+# Configure templates and static files
+templates = Jinja2Templates(directory="app/templates")
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
+# --- API Routers (Import and include routers from app/api/* modules) ---
+app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
+#app.include_router(admin.router, prefix="/admin", tags=["Admin"])
+#app.include_router(professor.router, prefix="/professor", tags=["Professor"])
+#app.include_router(student.router, prefix="/student", tags=["Student"])
+
+# --- Frontend Routes ---
+@app.get("/", response_class=HTMLResponse)
+async def index(request: Request):
+    """Render the home page"""
+    return templates.TemplateResponse("index.html", {"request": request})
+
+@app.get("/login", response_class=HTMLResponse)
+async def login_page(request: Request):
+    """Render the login page"""
+    return templates.TemplateResponse("login.html", {"request": request})
+
+@app.get("/register", response_class=HTMLResponse)
+async def register_page(request: Request):
+    """Render the registration page"""
+    return templates.TemplateResponse("register.html", {"request": request})
+
+# --- Allow running directly with python app/main.py for local dev ---
+if __name__ == "__main__":
+    logger.info("Running Uvicorn server directly for development...")
+    # For development, reload=True is useful. Port 8000 is common.
+    # Make sure this port is exposed in your Dockerfile and docker-compose.yml
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

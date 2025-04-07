@@ -1,5 +1,5 @@
 # This is a Docker Compose file for a Python web application with a Neo4j database.
-# It defines three services: 'database' for the Neo4j database, 'server' for the backend and 'frontend' for the frontend of the web application.
+# It defines two services: 'database' for the Neo4j database and 'server' for the backend and frontend of the web application.
 services:
   # The 'database' service uses the official Neo4j image, exposes ports 7474 and 7687, and sets up a health check to ensure the database is ready before starting the server.
   database:
@@ -28,16 +28,3 @@ services:
     depends_on:
       database:
         condition: service_healthy
- # The 'frontend' service is built from a separate directory, exposes port 3000, and mounts a volume for the frontend code.
-
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "80:80"
-  #   volumes:
-  #     - ./frontend/static:/usr/share/nginx/html/static
-  #   depends_on:
-  #     server:
-  #       condition: service_healthy

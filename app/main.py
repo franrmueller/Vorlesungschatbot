@@ -1,13 +1,15 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 import logging
 import os
 from app.api import auth
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.callbacks.base import BaseCallbackHandler
-from langchain.vectorstores.neo4j_vector import Neo4jVector
-from streamlit.logger import get_logger
+from langchain_community.vectorstores import Neo4jVector
 
 
 url = os.getenv("NEO4J_URI")
@@ -19,8 +21,6 @@ llm_name = os.getenv("LLM", "llama2")
 url = os.getenv("NEO4J_URI")
 
 os.environ["NEO4J_URL"] = url
-
-logger = get_logger(__name__)
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -34,27 +34,31 @@ app = FastAPI(
     version="0.1.0",
 )
 
-# --- Placeholder: Load Models on Startup (More advanced methods exist) ---
-# In a real app, use lifespan events or dependency injection for robust loading
-# For now, just log that we *would* load models here.
-logger.info("FastAPI app starting up...")
-logger.info(f"Configured Neo4j URI: {NEO4J_URI}")
-logger.info(f"Configured Ollama Base URL: {OLLAMA_BASE_URL}")
+# Configure templates and static files
+templates = Jinja2Templates(directory="app/templates")
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 # --- API Routers (Import and include routers from app/api/* modules) ---
 app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
-app.include_router(admin.router, prefix="/admin", tags=["Admin"])
-app.include_router(professor.router, prefix="/professor", tags=["Professor"])
-app.include_router(student.router, prefix="/student", tags=["Student"])
+#app.include_router(admin.router, prefix="/admin", tags=["Admin"])
+#app.include_router(professor.router, prefix="/professor", tags=["Professor"])
+#app.include_router(student.router, prefix="/student", tags=["Student"])
 
-# --- Basic Root Endpoint ---
-@app.get("/")
-async def read_root():
-    """
-    Simple health check / welcome endpoint.
-    """
-    logger.info("Root endpoint '/' accessed.")
-    return {"message": "Welcome to the Classroom Chatbot API"}
+# --- Frontend Routes ---
+@app.get("/", response_class=HTMLResponse)
+async def index(request: Request):
+    """Render the home page"""
+    return templates.TemplateResponse("index.html", {"request": request})
+
+@app.get("/login", response_class=HTMLResponse)
+async def login_page(request: Request):
+    """Render the login page"""
+    return templates.TemplateResponse("login.html", {"request": request})
+
+@app.get("/register", response_class=HTMLResponse)
+async def register_page(request: Request):
+    """Render the registration page"""
+    return templates.TemplateResponse("register.html", {"request": request})
 
 # --- Allow running directly with python app/main.py for local dev ---
 if __name__ == "__main__":

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Classroom Chatbot{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Welcome to Classroom Chatbot</h1>
+    <p>An AI-powered chatbot that helps students learn by asking questions about course materials.</p>
+    
+    {% if not user %}
+    <div class="cta-buttons">
+        <a href="/register" class="btn btn-primary">Get Started</a>
+        <a href="/login" class="btn btn-secondary">Login</a>
+    </div>
+    {% else %}
+    <div class="cta-buttons">
+        {% if user.role == 'STUDENT' %}
+            <a href="/student/classes" class="btn btn-primary">Go to My Classes</a>
+        {% elif user.role == 'PROFESSOR' %}
+            <a href="/professor/classes" class="btn btn-primary">Manage My Classes</a>
+        {% elif user.role == 'ADMIN' %}
+            <a href="/admin/dashboard" class="btn btn-primary">Admin Dashboard</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+<div class="features">
+    <div class="feature">
+        <h2>Ask Questions</h2>
+        <p>Ask questions about your course materials and get instant, accurate answers.</p>
+    </div>
+    <div class="feature">
+        <h2>Learn Efficiently</h2>
+        <p>Save time finding information in lengthy documents with AI assistance.</p>
+    </div>
+    <div class="feature">
+        <h2>Source Transparency</h2>
+        <p>All answers include citations to the source document and page number.</p>
+    </div>
+</div>
+{% endblock %}
