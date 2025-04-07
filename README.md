@@ -142,6 +142,7 @@ app/
   ├── js/ # JavaScript files 
 
   └── images/ # Static images
+  
 
 JavaScript is used to enhance the templates with dynamic features like real-time chat interactions.
 

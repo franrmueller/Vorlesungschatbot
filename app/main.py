@@ -8,10 +8,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain.vectorstores.neo4j_vector import Neo4jVector
 from streamlit.logger import get_logger
-from chains import (
-    load_embedding_model,
-    load_llm,
-)
+
 
 url = os.getenv("NEO4J_URI")
 username = os.getenv("NEO4J_USERNAME")
@@ -45,13 +42,10 @@ app = FastAPI(
 # In a real app, use lifespan events or dependency injection for robust loading
 # For now, just log that we *would* load models here.
 logger.info("FastAPI app starting up...")
-logger.info(f"Configured Neo4j URI: {NEO4J_URI}") # Be careful logging sensitive info
+logger.info(f"Configured Neo4j URI: {NEO4J_URI}")
 logger.info(f"Configured Ollama Base URL: {OLLAMA_BASE_URL}")
 
 # --- API Routers (Import and include routers from app/api/* modules) ---
-# Example: Create these files even if they are empty for now
-# from app.api import auth, admin, professor, student # Create these python files in app/api/
-
 app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
 app.include_router(admin.router, prefix="/admin", tags=["Admin"])
 app.include_router(professor.router, prefix="/professor", tags=["Professor"])

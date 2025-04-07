@@ -1,4 +1,3 @@
-# app/db/connect.py
 from neo4j import GraphDatabase, basic_auth
 import os
 import logging

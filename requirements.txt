@@ -27,3 +27,7 @@ python-jose[cryptography]>=3.3.0
 python-dotenv>=1.0.0
 pypdf>=3.17.0
 python-multipart
+
+# --- Frontend ---
+jinja2>=3.0.0
+aiofiles>=0.8.0
