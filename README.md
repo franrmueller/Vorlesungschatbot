@@ -84,8 +84,9 @@ Students often struggle to find specific information within extensive course mat
 - **Embedding Model**: Ollama or dedicated service
 - **Database**: ![Neo4j](https://img.shields.io/badge/Neo4j-Yes-green) (Graph + Vector Index)
 - **Backend**: ![FastAPI](https://img.shields.io/badge/FastAPI-Yes-green) (Python)
-- **Frontend**: ![JINJA2](https://img.shields.io/badge/JINJA2-Yes-green) + ![HTML/JS](https://img.shields.io/badge/HTML%2FJS-Yes-green)
-- **Containerizing**: ![Docker](https://img.shields.io/badge/Docker-Yes-green) & ![Docker Compose](https://img.shields.io/badge/Docker%20Compose-Yes-green)
+- **Frontend**: ![Jinja2](https://img.shields.io/badge/Jinja2-Yes-green) + ![HTML/JS](https://img.shields.io/badge/HTML%2FJS-Yes-green)
+- **Containerizing**: ![Docker](https://img.shields.io/badge/Docker-Yes-green) & ![Docker%20Compose](https://img.shields.io/badge/Docker%20Compose-Yes-green)
+
 ## Database Schema
 
 ### Nodes
@@ -265,8 +266,8 @@ Studierende haben oft Schwierigkeiten, bestimmte Informationen in umfangreichen 
 - **Embedding Model**: Ollama or dedicated service
 - **Datenbank**: ![Neo4j](https://img.shields.io/badge/Neo4j-Yes-green) (Graph + Vector Index)
 - **Backend**: ![FastAPI](https://img.shields.io/badge/FastAPI-Yes-green) (Python)
-- **Frontend**: ![JINJA2](https://img.shields.io/badge/JINJA2-Yes-green) + ![HTML/JS](https://img.shields.io/badge/HTML%2FJS-Yes-green)
-- **Containerisierung**: ![Docker](https://img.shields.io/badge/Docker-Yes-green) & ![Docker Compose](https://img.shields.io/badge/Docker%20Compose-Yes-green)
+- **Frontend**: ![Jinja2](https://img.shields.io/badge/Jinja2-Yes-green) + ![HTML/JS](https://img.shields.io/badge/HTML%2FJS-Yes-green)
+- **Containerisierung**: ![Docker](https://img.shields.io/badge/Docker-Yes-green) & ![Docker%20Compose](https://img.shields.io/badge/Docker%20Compose-Yes-green)
 
 <a name="datenbankschema"></a>
 ## Datenbankschema
