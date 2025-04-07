@@ -187,7 +187,7 @@ See the LICENSE file for details.
 ---
 
 <a name="deutsch"></a>
-# Classroom-Chatbot [Deutsch]
+# Vorlesungschatbot
 
 Ein KI-gestützter Chatbot, der Studierenden ermöglicht, durch direktes Stellen von Fragen zu ihren Kursmaterialien zu lernen. Mit einer modernen RAG-Architektur und Neo4j bietet der Chatbot kontextuell genaue Antworten, die ausschließlich auf Dokumenten basieren, die von verifizierten Professoren für bestimmte Kurse hochgeladen wurden.
 
