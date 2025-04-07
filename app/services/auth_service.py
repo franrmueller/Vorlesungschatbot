@@ -1,4 +1,3 @@
-# app/services/auth_service.py
 from neo4j import Driver
 from app.db.connect import get_driver
 from ..models import user as user_models

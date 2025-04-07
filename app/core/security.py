@@ -1,4 +1,3 @@
-# app/core/security.py
 from passlib.context import CryptContext
 from datetime import datetime, timedelta, timezone
 from typing import Optional
