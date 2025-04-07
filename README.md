@@ -125,7 +125,9 @@ app/
 
 │ ├── login.html # Authentication pages 
 
-│ ├── register.html │ ├── admin/ # Admin-specific views 
+│ ├── register.html 
+
+│ ├── admin/ # Admin-specific views 
 
 │ ├── professor/ # Professor-specific views 
 
