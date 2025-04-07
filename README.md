@@ -9,6 +9,7 @@ An AI-powered chatbot that empowers students to learn by asking questions direct
 - [Core Chatbot Functionality](#core-chatbot-functionality)
 - [Technology Stack](#technology-stack)
 - [Database Schema](#database-schema)
+- [Frontend Implementation](#frontend-implementation)
 - [Potential Enhancements & Future Work](#potential-enhancements--future-work)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -115,17 +116,29 @@ The frontend is implemented using Jinja2 templates integrated directly with Fast
 The template structure follows this organization:
 
 app/
+
 ├── templates/ 
+
 │ ├── base.html # Common layout template 
+
 │ ├── index.html # Landing page 
+
 │ ├── login.html # Authentication pages 
+
 │ ├── register.html │ ├── admin/ # Admin-specific views 
+
 │ ├── professor/ # Professor-specific views 
+
 │ └── student/ # Student-specific views 
+
 │ └── chat.html # Student chat interface 
+
 └── static/ 
+
 ├── css/ # Stylesheets 
+
 ├── js/ # JavaScript files 
+
 └── images/ # Static images
 
 JavaScript is used to enhance the templates with dynamic features like real-time chat interactions.
