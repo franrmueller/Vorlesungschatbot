@@ -103,6 +103,19 @@ Students often struggle to find specific information within extensive course mat
 - `(:PDF)-[:HAS_CHUNK]->(:PdfChunk)`
 - `(:PDF)-[:UPLOADED_BY]->(:User {role:'PROFESSOR'})`
 
+## Frontend Implementation
+
+The frontend is implemented using Jinja2 templates integrated directly with FastAPI. This approach provides:
+
+- **Server-Side Rendering**: Fast loading pages with content rendered by FastAPI
+- **Simple Structure**: HTML templates with embedded JavaScript for interactivity
+- **Direct Integration**: Templates are served directly from the FastAPI backend
+- **Role-Based UI**: Different views for students, professors, and administrators
+
+The template structure follows this organization:
+app/ ├── templates/ │ ├── base.html # Common layout template │ ├── index.html # Landing page │ ├── login.html # Authentication pages │ ├── register.html │ ├── admin/ # Admin-specific views │ ├── professor/ # Professor-specific views │ └── student/ # Student-specific views │ └── chat.html # Student chat interface └── static/ ├── css/ # Stylesheets ├── js/ # JavaScript files └── images/ # Static images
+JavaScript is used to enhance the templates with dynamic features like real-time chat interactions.
+
 ## Potential Enhancements & Future Work
 - Support for `.docx`, `.pptx`, `.txt`, URLs.
 - Chat history per user/class.
