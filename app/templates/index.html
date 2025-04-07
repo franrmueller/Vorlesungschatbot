@@ -1,25 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Classroom Chatbot{% endblock %}
+{% block title %}Startseite - Vorlesungschatbot{% endblock %}
 
 {% block content %}
 <div class="hero">
-    <h1>Welcome to Classroom Chatbot</h1>
-    <p>An AI-powered chatbot that helps students learn by asking questions about course materials.</p>
+    <h1>Willkommen beim Vorlesungschatbot</h1>
+    <p>Lerne, indem du mit deinen Kursdokumenten sprichst. Erreiche deinen persönlichen Dozenten rund um die Uhr :)</p>
     
     {% if not user %}
     <div class="cta-buttons">
-        <a href="/register" class="btn btn-primary">Get Started</a>
-        <a href="/login" class="btn btn-secondary">Login</a>
+        <a href="/register" class="btn btn-primary">Jetzt starten</a>
+        <a href="/login" class="btn btn-secondary">Anmelden</a>
     </div>
     {% else %}
     <div class="cta-buttons">
         {% if user.role == 'STUDENT' %}
-            <a href="/student/classes" class="btn btn-primary">Go to My Classes</a>
+            <a href="/student/classes" class="btn btn-primary">Zu meinen Kursen</a>
         {% elif user.role == 'PROFESSOR' %}
-            <a href="/professor/classes" class="btn btn-primary">Manage My Classes</a>
+            <a href="/professor/classes" class="btn btn-primary">Meine Kurse verwalten</a>
         {% elif user.role == 'ADMIN' %}
-            <a href="/admin/dashboard" class="btn btn-primary">Admin Dashboard</a>
+            <a href="/admin/dashboard" class="btn btn-primary">Administrator-Dashboard</a>
         {% endif %}
     </div>
     {% endif %}
@@ -27,16 +27,16 @@
 
 <div class="features">
     <div class="feature">
-        <h2>Ask Questions</h2>
-        <p>Ask questions about your course materials and get instant, accurate answers.</p>
+        <h2>Stelle Fragen</h2>
+        <p>Stelle Fragen zu deinen Kursmaterialien und erhalte sofort präzise Antworten.</p>
     </div>
     <div class="feature">
-        <h2>Learn Efficiently</h2>
-        <p>Save time finding information in lengthy documents with AI assistance.</p>
+        <h2>Effizient lernen</h2>
+        <p>Spar Zeit bei der Suche nach Informationen in umfangreichen Dokumenten mit KI-Unterstützung.</p>
     </div>
     <div class="feature">
-        <h2>Source Transparency</h2>
-        <p>All answers include citations to the source document and page number.</p>
+        <h2>Quellentransparenz</h2>
+        <p>Alle Antworten enthalten Quellenangaben mit Verweis auf das Ursprungsdokument und die Seitennummer.</p>
     </div>
 </div>
 {% endblock %}

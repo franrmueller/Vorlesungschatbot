@@ -1,39 +1,39 @@
 {% extends "base.html" %}
 
-{% block title %}Register - Classroom Chatbot{% endblock %}
+{% block title %}Registrieren - Vorlesungschatbot{% endblock %}
 
 {% block content %}
 <div class="auth-container">
-    <h1>Student Registration</h1>
+    <h1>Studierenden-Registrierung</h1>
     
     <div class="error-message" id="error-message" style="display: none;"></div>
     
     <form id="register-form" class="auth-form">
         <div class="form-group">
-            <label for="name">Full Name:</label>
+            <label for="name">Vollständiger Name:</label>
             <input type="text" id="name" name="name" required>
         </div>
         
         <div class="form-group">
-            <label for="username">Email:</label>
+            <label for="username">E-Mail:</label>
             <input type="email" id="username" name="username" required>
         </div>
         
         <div class="form-group">
-            <label for="password">Password:</label>
+            <label for="password">Passwort:</label>
             <input type="password" id="password" name="password" required minlength="8">
         </div>
         
         <div class="form-group">
-            <label for="confirm-password">Confirm Password:</label>
+            <label for="confirm-password">Passwort bestätigen:</label>
             <input type="password" id="confirm-password" name="confirm-password" required minlength="8">
         </div>
         
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary">Registrieren</button>
     </form>
     
     <div class="auth-links">
-        <p>Already have an account? <a href="/login">Login</a></p>
+        <p>Bereits ein Konto? <a href="/login">Anmelden</a></p>
     </div>
 </div>
 
@@ -47,7 +47,7 @@
         const errorMessage = document.getElementById('error-message');
         
         if (password !== confirmPassword) {
-            errorMessage.textContent = 'Passwords do not match.';
+            errorMessage.textContent = 'Passwörter stimmen nicht überein.';
             errorMessage.style.display = 'block';
             return;
         }
@@ -71,7 +71,7 @@
             const data = await response.json();
             
             if (!response.ok) {
-                errorMessage.textContent = data.detail || 'Registration failed. Please try again.';
+                errorMessage.textContent = data.detail || 'Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.';
                 errorMessage.style.display = 'block';
                 return;
             }
@@ -80,9 +80,9 @@
             window.location.href = '/login?registered=true';
             
         } catch (error) {
-            errorMessage.textContent = 'An error occurred. Please try again.';
+            errorMessage.textContent = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.';
             errorMessage.style.display = 'block';
-            console.error('Registration error:', error);
+            console.error('Registrierungsfehler:', error);
         }
     });
 </script>

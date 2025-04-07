@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Anmelden - Vorlesungschatbot{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h1>Anmelden</h1>
+    
+    <div class="error-message" id="error-message" style="display: none;"></div>
+    {% if request.query_params.get('registered') == 'true' %}
+        <div class="success-message">Registrierung erfolgreich. Sie können sich jetzt anmelden.</div>
+    {% endif %}
+    
+    <form id="login-form" class="auth-form">
+        <div class="form-group">
+            <label for="username">E-Mail:</label>
+            <input type="email" id="username" name="username" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Passwort:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Anmelden</button>
+    </form>
+    
+    <div class="auth-links">
+        <p>Noch kein Konto? <a href="/register">Registrieren</a></p>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    document.getElementById('login-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData();
+        formData.append('username', document.getElementById('username').value);
+        formData.append('password', document.getElementById('password').value);
+        
+        const errorMessage = document.getElementById('error-message');
+        
+        try {
+            const response = await fetch('/auth/login/token', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const data = await response.json();
+            
+            if (!response.ok) {
+                errorMessage.textContent = 'Ungültige E-Mail oder Passwort.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+            
+            // Save token to localStorage
+            localStorage.setItem('accessToken', data.access_token);
+            
+            // Redirect based on user role or to default page
+            // This would require fetching user info first, for now redirect to index
+            window.location.href = '/';
+            
+        } catch (error) {
+            errorMessage.textContent = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.';
+            errorMessage.style.display = 'block';
+            console.error('Anmeldefehler:', error);
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %}
