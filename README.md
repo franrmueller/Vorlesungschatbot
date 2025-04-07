@@ -84,7 +84,7 @@ Students often struggle to find specific information within extensive course mat
 - **Embedding Model**: Ollama or dedicated service
 - **Database**: ![Neo4j](https://img.shields.io/badge/Neo4j-Yes-green) (Graph + Vector Index)
 - **Backend**: ![FastAPI](https://img.shields.io/badge/FastAPI-Yes-green) (Python)
-- **Frontend**: ![JINJA2](https://img.shields.io/badge/HTML%2FJS-Yes-green) + ![HTML/JS](https://img.shields.io/badge/HTML%2FJS-Yes-green)
+- **Frontend**: ![JINJA2](https://img.shields.io/badge/JINJA2-Yes-green) + ![HTML/JS](https://img.shields.io/badge/HTML%2FJS-Yes-green)
 - **Containerization**: ![Docker][def] & ![Docker Compose][def]
 
 ## Database Schema
@@ -266,7 +266,7 @@ Studierende haben oft Schwierigkeiten, bestimmte Informationen in umfangreichen 
 - **Embedding Model**: Ollama or dedicated service
 - **Datenbank**: ![Neo4j](https://img.shields.io/badge/Neo4j-Yes-green) (Graph + Vector Index)
 - **Backend**: ![FastAPI](https://img.shields.io/badge/FastAPI-Yes-green) (Python)
-- **Frontend**: ![JINJA2](https://img.shields.io/badge/HTML%2FJS-Yes-green) + ![HTML/JS](https://img.shields.io/badge/HTML%2FJS-Yes-green)
+- **Frontend**: ![JINJA2](https://img.shields.io/badge/JINJA2-Yes-green) + ![HTML/JS](https://img.shields.io/badge/HTML%2FJS-Yes-green)
 - **Containerisierung**: ![Docker][def] & ![Docker Compose][def]
 
 <a name="datenbankschema"></a>
@@ -364,4 +364,4 @@ JavaScript wird verwendet, um die Templates mit dynamischen Funktionen wie Echtz
 ## Lizenz
 Siehe LICENSE-Datei für Details.
 
-[def]: https://img.shields.io/badge/Docker-Yes-green
+[def]: https://img.shields.io/badge/Docker%Compose-Yes-green
