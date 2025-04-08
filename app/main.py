@@ -22,19 +22,17 @@ url = os.getenv("NEO4J_URI")
 
 os.environ["NEO4J_URL"] = url
 
-# Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# --- FastAPI App Initialization ---
-# Create the FastAPI application instance
+# --- FastAPI App Initialization --
 app = FastAPI(
     title="Classroom Chatbot API",
     description="API endpoints for managing classes, documents, and chatting.",
     version="0.1.0",
 )
 
-# Configure templates and static files
+
 templates = Jinja2Templates(directory="app/templates")
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
@@ -63,6 +61,4 @@ async def register_page(request: Request):
 # --- Allow running directly with python app/main.py for local dev ---
 if __name__ == "__main__":
     logger.info("Running Uvicorn server directly for development...")
-    # For development, reload=True is useful. Port 8000 is common.
-    # Make sure this port is exposed in your Dockerfile and docker-compose.yml
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
