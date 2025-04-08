@@ -158,7 +158,7 @@ JavaScript is used to enhance the templates with dynamic features like real-time
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/classroom-chatbot.git
+   git clone https://github.com/your-username/vorlesungschatbot.git
    ```
 2. Run docker:
    ```bash
@@ -357,7 +357,7 @@ JavaScript wird verwendet, um die Templates mit dynamischen Funktionen wie Echtz
 ## Installation
 1. Klonen Sie das Repository:
    ```bash
-   git clone https://github.com/your-username/classroom-chatbot.git
+   git clone https://github.com/your-username/vorlesungschatbot.git
    ```
 2. Führen Sie Docker aus:
    ```bash
