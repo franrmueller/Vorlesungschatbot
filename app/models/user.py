@@ -3,7 +3,7 @@ from typing import Optional
 import uuid
 
 class UserBase(BaseModel):
-    username: EmailStr # Using email as username is common
+    username: EmailStr
     name: Optional[str] = None
     role: str = Field(default="STUDENT", description="User role (STUDENT, PROFESSOR, ADMIN)")
 
