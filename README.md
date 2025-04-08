@@ -302,29 +302,42 @@ app/
 
 ├── templates/ 
 
+
 │ ├── base.html # Gemeinsame Layout-Vorlage 
+
 
 │ ├── index.html # Startseite 
 
+
 │ ├── login.html # Authentifizierungsseiten 
+
 
 │ ├── register.html 
 
+
 │ ├── admin/ # Admin-spezifische Ansichten 
+
 
 │ ├── professor/ # Professor-spezifische Ansichten 
 
+
 │ └── student/ # Studierenden-spezifische Ansichten 
+
 
 │ └── chat.html # Chat-Oberfläche 
 
+
 └── static/ 
+
 
 │  ├── css/ # Stylesheets 
 
+
 │ ├── js/ # JavaScript-Dateien 
 
+
 │  └── images/ # Statische Bilder
+
 
 JavaScript wird verwendet, um die Templates mit dynamischen Funktionen wie Echtzeit-Chat-Interaktionen zu erweitern.
 
