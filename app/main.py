@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 
 # --- FastAPI App Initialization --
 app = FastAPI(
-    title="Classroom Chatbot API",
+    title="Vorlesungschatbot API",
     description="API endpoints for managing classes, documents, and chatting.",
     version="0.1.0",
 )

@@ -1,4 +1,3 @@
-# app/api/professor.py
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, Form
 # Import dependencies for authorization and services later
 from app.core import security
@@ -7,11 +6,11 @@ from app.services import class_service
 
 router = APIRouter()
 
-# Dependency to check if the user is a professor (example)
-# async def get_current_professor_user(user: user_models.User = Depends(security.get_current_active_user)):
-#     if user.role != "PROFESSOR":
-#         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized")
-#     return user
+# Dependency to check if the user is a professor
+async def get_current_professor_user(user: user_models.User = Depends(security.get_current_active_user)):
+    if user.role != "PROFESSOR":
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized")
+    return user
 
 @router.post("/classes", status_code=status.HTTP_201_CREATED)
 # async def create_class(class_data: class_models.ClassCreate, professor: user_models.User = Depends(get_current_professor_user)):
