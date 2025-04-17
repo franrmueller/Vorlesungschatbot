@@ -44,3 +44,4 @@ async def register_page(request: Request):
 async def student_class_page(request: Request):
     """Render the registration page"""
     return templates.TemplateResponse("student_class.html", {"request": request})
+
