@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+ 
+{% block title %}Professor:innen verwalten – Admin{% endblock %}
+ 
+{% block content %}
+<div class="dashboard-container">
+<h1>Professor:innen verwalten</h1>
+ 
+    <!-- Zurück zum Admin-Dashboard -->
+<a href="/admin/dashboard" class="btn btn-secondary">Zurück zum Dashboard</a>
+ 
+    <!-- Hinzufügen -->
+<form id="add-professor-form" class="form-inline" method="POST">
+<h2>Neuen Professor hinzufügen</h2>
+<input type="text" name="name" placeholder="Name" required>
+<input type="email" name="email" placeholder="E-Mail" required>
+<input type="password" name="password" placeholder="Passwort" required>
+<button type="submit" class="btn btn-primary">Hinzufügen</button>
+</form>
+ 
+    <!-- Erfolg / Fehlernachricht -->
+    {% if success %}
+<div class="success-message">{{ success }}</div>
+    {% endif %}
+    {% if error %}
+<div class="error-message">{{ error }}</div>
+    {% endif %}
+ 
+    <!-- Liste aller Professor:innen -->
+<h2>Bestehende Professor:innen</h2>
+    {% if professors %}
+<table class="admin-table">
+<thead>
+<tr>
+<th>Name</th>
+<th>E-Mail</th>
+<th>Zugewiesene Kurse</th>
+<th>Aktionen</th>
+</tr>
+</thead>
+<tbody>
+                {% for professor in professors %}
+<tr>
+<td>{{ professor.name }}</td>
+<td>{{ professor.email }}</td>
+<td>
+                            {% for course in professor.courses %}
+                                {{ course.name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+</td>
+<td>
+<form method="POST" action="/admin/professors/delete/{{ professor.id }}" onsubmit="return confirm('Wirklich löschen?');" style="display:inline-block;">
+<button class="btn btn-danger">Löschen</button>
+</form>
+<a href="/admin/professors/edit/{{ professor.id }}" class="btn btn-warning">Bearbeiten</a>
+</td>
+</tr>
+                {% endfor %}
+</tbody>
+</table>
+    {% else %}
+<p>Es sind aktuell keine Professor:innen im System.</p>
+    {% endif %}
+</div>
+{% endblock %}

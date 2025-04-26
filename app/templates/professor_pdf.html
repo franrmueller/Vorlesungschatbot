@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+ 
+{% block title %}PDF-Übersicht – Kurs {{ course.name }}{% endblock %}
+ 
+{% block content %}
+<div class="pdf-dashboard">
+<h1>PDF-Übersicht für Kurs: {{ course.name }}</h1>
+ 
+    <!-- Zurück zur Kursübersicht -->
+<a href="/professor/classes" class="btn btn-secondary">Zur Kursübersicht</a>
+ 
+    <!-- Hochladen -->
+<form id="upload-form" class="upload-form" enctype="multipart/form-data" method="POST">
+<label for="pdf-file">Neues PDF hochladen:</label>
+<input type="file" name="pdf" id="pdf-file" accept="application/pdf" required>
+<button type="submit" class="btn btn-primary">Hochladen</button>
+</form>
+ 
+    <!-- Fehlermeldung (z. B. bei doppeltem Dateinamen) -->
+    {% if error %}
+<div class="error-message">{{ error }}</div>
+    {% endif %}
+    {% if success %}
+<div class="success-message">{{ success }}</div>
+    {% endif %}
+ 
+    <!-- PDF-Liste -->
+    {% if pdfs %}
+<table class="pdf-table">
+<thead>
+<tr>
+<th>Dateiname</th>
+<th>Hochgeladen am</th>
+<th>Aktionen</th>
+</tr>
+</thead>
+<tbody>
+                {% for pdf in pdfs %}
+<tr>
+<td>{{ pdf.name }}</td>
+<td>{{ pdf.uploaded_at }}</td>
+<td>
+<form action="/professor/pdf/{{ course.id }}/update/{{ pdf.id }}" method="POST" enctype="multipart/form-data" style="display:inline-block;">
+<input type="file" name="updated_pdf" accept="application/pdf" required>
+<button type="submit" class="btn btn-warning">Aktualisieren</button>
+</form>
+<form action="/professor/pdf/{{ course.id }}/delete/{{ pdf.id }}" method="POST" onsubmit="return confirm('Möchten Sie diese Datei wirklich löschen?');" style="display:inline-block;">
+<button type="submit" class="btn btn-danger">Löschen</button>
+</form>
+</td>
+</tr>
+                {% endfor %}
+</tbody>
+</table>
+    {% else %}
+<p>Es wurden noch keine PDFs hochgeladen.</p>
+    {% endif %}
+</div>
+{% endblock %}

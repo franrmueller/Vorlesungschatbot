@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+ 
+{% block title %}Admin-Dashboard – Vorlesungschatbot{% endblock %}
+ 
+{% block content %}
+<div class="dashboard-container">
+<h1>Administrator-Dashboard</h1>
+<p>Wählen Sie eine Übersicht, die Sie verwalten möchten:</p>
+ 
+    <div class="admin-options">
+<div class="admin-card">
+<h2>Professor:innen</h2>
+<p>Übersicht aller angelegten Professor:innen. Hinzufügen, bearbeiten oder löschen.</p>
+<a href="/admin/professors" class="btn btn-primary">Professor:innen verwalten</a>
+</div>
+ 
+        <div class="admin-card">
+<h2>Kurse</h2>
+<p>Alle Kurse im System. Erstellen, zuordnen oder entfernen.</p>
+<a href="/admin/classes" class="btn btn-primary">Kurse verwalten</a>
+</div>
+ 
+        <div class="admin-card">
+<h2>Studierende</h2>
+<p>Liste aller registrierten Studierenden (anonymisiert). Kurse und Aktivitäten einsehen.</p>
+<a href="/admin/students" class="btn btn-primary">Studierende verwalten</a>
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+ 

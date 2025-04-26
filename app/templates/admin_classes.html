@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+ 
+{% block title %}Kurse verwalten – Admin{% endblock %}
+ 
+{% block content %}
+<div class="dashboard-container">
+<h1>Kurse verwalten</h1>
+ 
+    <!-- Zurück zum Dashboard -->
+<a href="/admin/dashboard" class="btn btn-secondary">Zurück zum Dashboard</a>
+ 
+    <!-- Neuen Kurs anlegen -->
+<form id="add-class-form" class="form-inline" method="POST">
+<h2>Neuen Kurs erstellen</h2>
+<input type="text" name="name" placeholder="Kursname (z. B. Datenbanken)" required>
+<input type="text" name="code" placeholder="Kurs-ID (z. B. WWIBE122)" required>
+<button type="submit" class="btn btn-primary">Kurs hinzufügen</button>
+</form>
+ 
+    {% if success %}
+<div class="success-message">{{ success }}</div>
+    {% endif %}
+    {% if error %}
+<div class="error-message">{{ error }}</div>
+    {% endif %}
+ 
+    <!-- Kursliste -->
+<h2>Alle Kurse</h2>
+    {% if classes %}
+<div class="course-list">
+            {% for course in classes %}
+<div class="course-card">
+<h3>{{ course.name }}</h3>
+<p>Kurs-ID: {{ course.code }}</p>
+<p>Dozent: {{ course.professor_name or "Nicht zugewiesen" }}</p>
+ 
+                    <div class="btn-group">
+<a href="/admin/pdf/{{ course.id }}" class="btn btn-secondary">PDF-Übersicht</a>
+<a href="/admin/chat/{{ course.id }}" class="btn btn-primary">Zum Chat</a>
+<form method="POST" action="/admin/classes/delete/{{ course.id }}" onsubmit="return confirm('Diesen Kurs wirklich löschen?');" style="display:inline-block;">
+<button type="submit" class="btn btn-danger">Löschen</button>
+</form>
+</div>
+</div>
+            {% endfor %}
+</div>
+    {% else %}
+<p>Es sind derzeit keine Kurse im System.</p>
+    {% endif %}
+</div>
+{% endblock %}

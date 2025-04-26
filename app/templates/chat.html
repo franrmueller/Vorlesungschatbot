@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+ 
+{% block title %}Chat – Vorlesung {{ course.name }}{% endblock %}
+ 
+{% block content %}
+<div class="chat-container">
+<!-- Seitenleiste (links) -->
+<aside class="chat-sidebar">
+<a href="/student/classes" class="btn btn-secondary">Zur Kursübersicht</a>
+<button id="reset-chat" class="btn btn-warning">Reset</button>
+<button id="view-history" class="btn btn-light">Historie</button>
+</aside>
+ 
+    <!-- Hauptbereich (Chat) -->
+<section class="chat-main">
+<h1>Vorlesung: {{ course.name }}</h1>
+<div id="chat-window" class="chat-window">
+<!-- Nachrichten erscheinen hier -->
+</div>
+ 
+        <!-- Fragefeld -->
+<form id="chat-form" class="chat-form">
+<input type="text" id="user-input" placeholder="Frage stellen..." required>
+<button type="submit" class="btn btn-primary">Senden</button>
+</form>
+</section>
+</div>
+ 
+{% block extra_js %}
+<script>
+    const form = document.getElementById('chat-form');
+    const chatWindow = document.getElementById('chat-window');
+    const userInput = document.getElementById('user-input');
+    const resetBtn = document.getElementById('reset-chat');
+ 
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const question = userInput.value;
+        appendMessage('user', question);
+        userInput.value = '';
+ 
+        try {
+            const response = await fetch('/api/chat/{{ course.id }}', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: question })
+            });
+            const data = await response.json();
+            appendMessage('bot', data.answer + ' <br><small>Quelle: ' + data.source + '</small>');
+        } catch (error) {
+            appendMessage('bot', 'Fehler beim Abrufen der Antwort.');
+            console.error(error);
+        }
+    });
+ 
+    resetBtn.addEventListener('click', () => {
+        chatWindow.innerHTML = '';
+        // Optional: Reset-API-Call
+    });
+ 
+    function appendMessage(sender, text) {
+        const msg = document.createElement('div');
+        msg.classList.add('chat-message', sender);
+        msg.innerHTML = text;
+        chatWindow.appendChild(msg);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+</script>
+{% endblock %}
+{% endblock %}

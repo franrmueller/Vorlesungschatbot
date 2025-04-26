@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+ 
+{% block title %}Chathistorien – Admin{% endblock %}
+ 
+{% block content %}
+<div class="dashboard-container">
+<h1>Chathistorien (anonymisiert)</h1>
+ 
+    <!-- Zurück zum Dashboard -->
+<a href="/admin/dashboard" class="btn btn-secondary">Zurück zum Dashboard</a>
+ 
+    <!-- Kursauswahl -->
+<form method="GET" action="/admin/chathistory" class="form-inline">
+<label for="course_id">Kurs auswählen:</label>
+<select name="course_id" id="course_id" required>
+            {% for course in courses %}
+<option value="{{ course.id }}" {% if selected_course and course.id == selected_course.id %}selected{% endif %}>
+                    {{ course.name }} ({{ course.code }})
+</option>
+            {% endfor %}
+</select>
+<button type="submit" class="btn btn-primary">Anzeigen</button>
+</form>
+ 
+    <!-- Historie anzeigen -->
+    {% if selected_course %}
+<h2>Fragen & Antworten für {{ selected_course.name }}</h2>
+ 
+        {% if history %}
+<table class="admin-table">
+<thead>
+<tr>
+<th>Frage</th>
+<th>Antwort</th>
+<th>Datum</th>
+</tr>
+</thead>
+<tbody>
+                    {% for entry in history %}
+<tr>
+<td>{{ entry.question }}</td>
+<td>{{ entry.answer }}</td>
+<td>{{ entry.timestamp }}</td>
+</tr>
+                    {% endfor %}
+</tbody>
+</table>
+        {% else %}
+<p>Für diesen Kurs wurden noch keine Fragen gestellt.</p>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

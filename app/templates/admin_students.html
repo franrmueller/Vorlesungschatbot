@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+ 
+{% block title %}Studierende verwalten – Admin{% endblock %}
+ 
+{% block content %}
+<div class="dashboard-container">
+<h1>Studierendenübersicht (anonymisiert)</h1>
+ 
+    <!-- Zurück zum Admin-Dashboard -->
+<a href="/admin/dashboard" class="btn btn-secondary">Zurück zum Dashboard</a>
+ 
+    <!-- Studierende anzeigen -->
+    {% if students %}
+<table class="admin-table">
+<thead>
+<tr>
+<th>Benutzer-ID</th>
+<th>Kurse</th>
+<th>Letzter Login</th>
+<th>Erstellte Prompts</th>
+<th>Aktionen</th>
+</tr>
+</thead>
+<tbody>
+                {% for student in students %}
+<tr>
+<td>{{ student.id }}</td>
+<td>
+                            {% for course in student.courses %}
+                                {{ course.code }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+</td>
+<td>{{ student.last_login or "Keine Info" }}</td>
+<td>{{ student.prompt_count }}</td>
+<td>
+<form method="POST" action="/admin/students/delete/{{ student.id }}" onsubmit="return confirm('Diesen Studierenden wirklich anonymisiert entfernen?');" style="display:inline-block;">
+<button class="btn btn-danger">Entfernen</button>
+</form>
+</td>
+</tr>
+                {% endfor %}
+</tbody>
+</table>
+    {% else %}
+<p>Aktuell sind keine Studierenden registriert.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+ 
+{% block title %}PDF-Übersicht mit Metadaten – Admin{% endblock %}
+ 
+{% block content %}
+<div class="dashboard-container">
+<h1>Zentrale PDF-Übersicht</h1>
+ 
+    <a href="/admin/dashboard" class="btn btn-secondary">Zurück zum Dashboard</a>
+ 
+    {% if success %}
+<div class="success-message">{{ success }}</div>
+    {% endif %}
+    {% if error %}
+<div class="error-message">{{ error }}</div>
+    {% endif %}
+ 
+    {% if pdfs %}
+<table class="admin-table">
+<thead>
+<tr>
+<th>Dateiname</th>
+<th>Kurs</th>
+<th>Hochgeladen von</th>
+<th>Hochgeladen am</th>
+<th>Status</th>
+<th>Aktionen</th>
+</tr>
+</thead>
+<tbody>
+                {% for pdf in pdfs %}
+<tr>
+<td>{{ pdf.name }}</td>
+<td>{{ pdf.course_name }}</td>
+<td>{{ pdf.uploader or "Unbekannt" }}</td>
+<td>{{ pdf.uploaded_at }}</td>
+<td>
+                            {% if pdf.status == 'indexing' %}
+<span class="status status-processing">Wird verarbeitet</span>
+                            {% elif pdf.status == 'indexed' %}
+<span class="status status-ok">Indexiert</span>
+                            {% elif pdf.status == 'error' %}
+<span class="status status-error">Fehlgeschlagen</span>
+                            {% else %}
+<span class="status status-unknown">Unbekannt</span>
+                            {% endif %}
+</td>
+<td>
+<form action="/admin/pdf/update/{{ pdf.id }}" method="POST" enctype="multipart/form-data" style="display:inline-block;">
+<input type="file" name="updated_pdf" accept="application/pdf" required>
+<button class="btn btn-warning" type="submit">Aktualisieren</button>
+</form>
+<form action="/admin/pdf/delete/{{ pdf.id }}" method="POST" onsubmit="return confirm('Wirklich löschen?');" style="display:inline-block;">
+<button class="btn btn-danger" type="submit">Löschen</button>
+</form>
+</td>
+</tr>
+                {% endfor %}
+</tbody>
+</table>
+    {% else %}
+<p>Es wurden noch keine PDFs hochgeladen.</p>
+    {% endif %}
+</div>
+{% endblock %}
