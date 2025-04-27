@@ -25,89 +25,82 @@ templates = Jinja2Templates(directory="app/templates")
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 # Frontend Routes
+ 
+# Frontend Routes
+ 
+# Home page route (landing page for all users)
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     """Render the home page"""
     return templates.TemplateResponse("index.html", {"request": request})
-
+ 
+# Login page route (for all users)
 @app.get("/login", response_class=HTMLResponse)
 async def login_page(request: Request):
     """Render the login page"""
     return templates.TemplateResponse("login.html", {"request": request})
-
+ 
+# Registration page route (for students self-registration)
 @app.get("/register", response_class=HTMLResponse)
 async def register_page(request: Request):
-    """Render the registration page"""
     return templates.TemplateResponse("register.html", {"request": request})
-
+ 
+# Student course overview route (shows all enrolled courses)
 @app.get("/student_class", response_class=HTMLResponse)
 async def student_class_page(request: Request):
-    """Render the registration page"""
     return templates.TemplateResponse("student_class.html", {"request": request})
-
-@app.get("/chat", response_class=HTMLResponse)
-async def chat_page(request: Request):
-    """Render the registration page"""
-    return templates.TemplateResponse("chat.html", {"request": request})
-
-@app.get("/admin/dashboard", response_class=HTMLResponse)
-
+ 
+# # General chat page (used without course context)
+# @app.get("/chat", response_class=HTMLResponse)
+# async def chat_page(request: Request):
+#     return templates.TemplateResponse("chat.html", {"request": request})
+ 
+# Admin dashboard (entry page after admin login)
+@app.get("/admin_dashboard", response_class=HTMLResponse)
 async def admin_dashboard(request: Request):
-
     return templates.TemplateResponse("admin_dashboard.html", {"request": request})
  
-@app.get("/admin/professors", response_class=HTMLResponse)
-
+# Admin professor management page (view, add, delete professors)
+@app.get("/admin_professors", response_class=HTMLResponse)
 async def admin_professors(request: Request):
-
     return templates.TemplateResponse("admin_professors.html", {"request": request})
  
-@app.get("/admin/classes", response_class=HTMLResponse)
-
+# Admin course management page (view, add, delete courses)
+@app.get("/admin_classes", response_class=HTMLResponse)
 async def admin_classes(request: Request):
-
     return templates.TemplateResponse("admin_classes.html", {"request": request})
  
-@app.get("/admin/students", response_class=HTMLResponse)
-
+# Admin student management page (view registered students anonymously)
+@app.get("/admin_students", response_class=HTMLResponse)
 async def admin_students(request: Request):
-
     return templates.TemplateResponse("admin_students.html", {"request": request})
  
-@app.get("/admin/pdf", response_class=HTMLResponse)
-
+# Admin PDF management page (central document management)
+@app.get("/admin_pdf", response_class=HTMLResponse)
 async def admin_pdf(request: Request):
-
     return templates.TemplateResponse("admin_pdf.html", {"request": request})
  
-@app.get("/admin/chathistory", response_class=HTMLResponse)
-
+# Admin chat history overview page (view anonymous chat logs)
+@app.get("/admin_chathistory", response_class=HTMLResponse)
 async def admin_chathistory(request: Request):
-
     return templates.TemplateResponse("admin_chathistory.html", {"request": request})
  
-@app.get("/professor/classes", response_class=HTMLResponse)
-
+# Professor course overview page (shows courses assigned to professor)
+@app.get("/professor_classes", response_class=HTMLResponse)
 async def professor_classes(request: Request):
-
     return templates.TemplateResponse("professor_classes.html", {"request": request})
  
-@app.get("/professor/pdf/{course_id}", response_class=HTMLResponse)
-
+# Professor PDF management page for a specific course
+@app.get("/professor_pdf/{course_id}", response_class=HTMLResponse)
 async def professor_pdf(request: Request, course_id: str):
-
     return templates.TemplateResponse("professor_pdf.html", {"request": request, "course_id": course_id})
  
-@app.get("/student/classes", response_class=HTMLResponse)
-
+# Student course overview route (alternative naming with slash structure)
+@app.get("/student_classes", response_class=HTMLResponse)
 async def student_classes(request: Request):
-
     return templates.TemplateResponse("student_class.html", {"request": request})
  
+# Chat page for a specific course (optional future use)
 @app.get("/chat/{course_id}", response_class=HTMLResponse)
-
 async def chat_view(request: Request, course_id: str):
-
     return templates.TemplateResponse("chat.html", {"request": request, "course_id": course_id})
-
- 
