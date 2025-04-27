@@ -1,3 +1,22 @@
+<!-- {#
+    Requirements for Backend to make this page work (EN):
+    1. The backend must pass a 'courses' list to the template.
+    2. Each course object must have:
+       - course.name → the course name
+       - course.code → the course ID
+       - course.id → the course ID used in URLs for linking PDF and Chat pages
+    3. If 'courses' is empty or missing, a message should inform the professor that no courses are assigned yet.
+     
+    Anforderungen an das Backend, damit diese Seite funktioniert (DE):
+    1. Das Backend muss eine Liste namens 'courses' an das Template übergeben.
+    2. Jeder Kurs muss folgende Attribute besitzen:
+       - course.name → Name des Kurses
+       - course.code → Kurskennung
+       - course.id → Kurs-ID für Verlinkungen zur PDF-Übersicht und Chatseite
+    3. Falls 'courses' leer oder nicht vorhanden ist, soll eine Nachricht angezeigt werden, dass noch keine Kurse zugewiesen wurden.
+    #} -->
+
+
 {% extends "base.html" %}
  
 {% block title %}Meine Kurse – Professor:innenansicht{% endblock %}

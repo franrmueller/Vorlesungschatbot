@@ -1,3 +1,31 @@
+<!-- {#
+    Requirements for Backend to make this page work (EN):
+    1. The backend must pass a 'course' object to the template.
+       - course.name → the name of the course
+       - course.id → used for upload/update/delete actions
+    2. The backend must pass a 'pdfs' list to the template.
+       - Each pdf must have:
+         - pdf.name → name of the file
+         - pdf.uploaded_at → upload timestamp
+         - pdf.id → unique ID for updating or deleting
+    3. The backend must optionally pass 'error' and 'success' messages after file actions.
+    4. Uploads and updates must send a POST request and handle file data correctly (multipart/form-data).
+     
+    Anforderungen an das Backend, damit diese Seite funktioniert (DE):
+    1. Das Backend muss ein 'course'-Objekt an das Template übergeben.
+       - course.name → Name des Kurses
+       - course.id → für Upload/Update/Delete benötigt
+    2. Das Backend muss eine 'pdfs'-Liste an das Template übergeben.
+       - Jede PDF muss enthalten:
+         - pdf.name → Dateiname
+         - pdf.uploaded_at → Zeitpunkt des Uploads
+         - pdf.id → eindeutige ID für Bearbeiten oder Löschen
+    3. Das Backend soll optional 'error'- und 'success'-Nachrichten übergeben (nach Dateiaktionen).
+    4. Uploads und Updates müssen eine POST-Anfrage mit Dateiinhalt korrekt verarbeiten (multipart/form-data).
+    #} -->
+
+
+
 {% extends "base.html" %}
  
 {% block title %}PDF-Übersicht – Kurs {{ course.name }}{% endblock %}

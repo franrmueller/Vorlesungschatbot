@@ -1,3 +1,36 @@
+<!-- {#
+    Requirements for Backend to make this page work (EN):
+    1. The backend must pass a 'courses' list to the template.
+    2. Each course object must have:
+       - course.id → for selection in the dropdown
+       - course.name → course name for display
+       - course.code → course code for display
+    3. If a course is selected (via GET parameter 'course_id'), the backend must also pass:
+       - selected_course → the course object corresponding to the selection
+       - history → a list of chat entries for the selected course
+    4. Each history entry must have:
+       - entry.question → the asked question
+       - entry.answer → the chatbot’s answer
+       - entry.timestamp → date/time of the chat
+    5. If no history exists for a course, a message should be shown.
+     
+    Anforderungen an das Backend, damit diese Seite funktioniert (DE):
+    1. Das Backend muss eine Liste namens 'courses' an das Template übergeben.
+    2. Jeder Kurs muss enthalten:
+       - course.id → für die Auswahl im Dropdown
+       - course.name → Name des Kurses (Anzeige)
+       - course.code → Kurscode (Anzeige)
+    3. Wenn ein Kurs ausgewählt ist (über GET-Parameter 'course_id'), muss das Backend zusätzlich übergeben:
+       - selected_course → das ausgewählte Kurs-Objekt
+       - history → Liste der Chat-Einträge für den Kurs
+    4. Jeder Chat-Eintrag muss enthalten:
+       - entry.question → gestellte Frage
+       - entry.answer → Antwort des Chatbots
+       - entry.timestamp → Datum/Zeit der Konversation
+    5. Falls keine Historie für einen Kurs existiert, soll eine entsprechende Nachricht angezeigt werden.
+    #} -->
+
+
 {% extends "base.html" %}
  
 {% block title %}Chathistorien – Admin{% endblock %}

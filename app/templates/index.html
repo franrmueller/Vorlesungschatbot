@@ -1,3 +1,22 @@
+<!-- {#
+    Requirements for Backend to make this page work (EN):
+    1. The backend must pass a 'user' object to the template if a user is logged in.
+    2. The 'user' object must contain a 'role' field.
+       - If user.role == 'STUDENT' → Show button to student courses.
+       - If user.role == 'PROFESSOR' → Show button to professor courses.
+       - If user.role == 'ADMIN' → Show button to admin dashboard.
+    3. If no user is logged in, display buttons for registration and login.
+     
+    Anforderungen an das Backend, damit diese Seite funktioniert (DE):
+    1. Das Backend muss ein 'user'-Objekt an das Template übergeben, wenn ein Nutzer eingeloggt ist.
+    2. Das 'user'-Objekt muss ein 'role'-Feld enthalten.
+       - Wenn user.role == 'STUDENT' → Button zu den Kursen des Studierenden anzeigen.
+       - Wenn user.role == 'PROFESSOR' → Button zu den Kursen des Professors anzeigen.
+       - Wenn user.role == 'ADMIN' → Button zum Admin-Dashboard anzeigen.
+    3. Wenn kein Benutzer eingeloggt ist, sollen die Buttons für Registrierung und Anmeldung angezeigt werden.
+    #} -->
+
+
 {% extends "base.html" %}
 
 {% block title %}Startseite - Vorlesungschatbot{% endblock %}

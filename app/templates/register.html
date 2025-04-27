@@ -1,3 +1,33 @@
+<!-- {#
+    Requirements for Backend to make this page work (EN):
+    1. The backend must provide an endpoint at '/auth/register' that accepts a POST request with JSON data.
+    2. The JSON body must include:
+       - first_name → student's first name
+       - last_name → student's last name
+       - username → student's email address
+       - password → student's password
+       - role → role set as "STUDENT"
+    3. The endpoint must validate the data and return:
+       - 200 OK with success message if registration is successful
+       - 400/422 Error with a detail message if registration fails
+    4. After successful registration, user should be redirected to the login page.
+     
+    Anforderungen an das Backend, damit diese Seite funktioniert (DE):
+    1. Das Backend muss einen Endpunkt unter '/auth/register' bereitstellen, der POST-Anfragen mit JSON-Daten akzeptiert.
+    2. Der JSON-Body muss enthalten:
+       - first_name → Vorname des Studierenden
+       - last_name → Nachname des Studierenden
+       - username → E-Mail-Adresse des Studierenden
+       - password → Passwort des Studierenden
+       - role → Rolle, standardmäßig "STUDENT"
+    3. Der Endpunkt muss die Daten prüfen und Folgendes zurückgeben:
+       - 200 OK mit Erfolgsnachricht bei erfolgreicher Registrierung
+       - 400/422 Fehler mit einer Fehlermeldung bei fehlgeschlagener Registrierung
+    4. Nach erfolgreicher Registrierung soll eine Weiterleitung auf die Login-Seite erfolgen.
+    #} -->
+
+
+
 {% extends "base.html" %}
  
 {% block title %}Registrieren - Vorlesungschatbot{% endblock %}

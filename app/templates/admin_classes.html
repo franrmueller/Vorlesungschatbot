@@ -1,3 +1,31 @@
+<!-- {#
+    Requirements for Backend to make this page work (EN):
+    1. The backend must pass a 'classes' list to the template.
+    2. Each class (course) object must have:
+       - course.name → name of the course
+       - course.code → unique course ID
+       - course.professor_name → name of the assigned professor (optional)
+       - course.id → course ID for PDF and Chat links, and for deletion
+    3. The backend must handle:
+       - POST request to create a new course with name and code
+       - POST request to delete a course via '/admin/classes/delete/{course_id}'
+    4. Success and error messages should optionally be passed to the template.
+     
+    Anforderungen an das Backend, damit diese Seite funktioniert (DE):
+    1. Das Backend muss eine Liste namens 'classes' an das Template übergeben.
+    2. Jeder Kurs muss enthalten:
+       - course.name → Name des Kurses
+       - course.code → Eindeutige Kurskennung
+       - course.professor_name → Name des zugewiesenen Professors (optional)
+       - course.id → Kurs-ID für Verlinkungen zu PDF, Chat und zum Löschen
+    3. Das Backend muss POST-Anfragen verarbeiten:
+       - zur Erstellung eines neuen Kurses mit Name und Code
+       - zum Löschen eines Kurses über '/admin/classes/delete/{course_id}'
+    4. Erfolgs- und Fehlermeldungen sollen optional an das Template übergeben werden.
+    #} -->
+
+
+
 {% extends "base.html" %}
  
 {% block title %}Kurse verwalten – Admin{% endblock %}
