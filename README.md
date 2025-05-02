@@ -81,7 +81,7 @@ Students often struggle to find specific information within extensive course mat
 ## Technology Stack
 - **Orchestration**: ![LangChain](https://img.shields.io/badge/LangChain-Yes-green) (Python)
 - **LLM Serving**: ![Ollama](https://img.shields.io/badge/Ollama-Yes-green) (Llama 2)
-- **Embedding Model**: ![Sentence Transformers](https://img.shields.io/badge/Sentence%20Transformers-Yes-green)
+   - **Embedding Model**: ![Sentence Transformers](https://img.shields.io/badge/Sentence%20Transformers-Yes-green)
 - **Database**: ![Neo4j](https://img.shields.io/badge/Neo4j-Yes-green) (Graph + Vector Index)
 - **Backend**: ![FastAPI](https://img.shields.io/badge/FastAPI-Yes-green) (Python)
 - **Frontend**: ![Jinja2](https://img.shields.io/badge/Jinja2-Yes-green) + ![HTML/JS](https://img.shields.io/badge/HTML%2FJS-Yes-green)
