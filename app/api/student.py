@@ -1,5 +1,8 @@
 # app/api/student.py
 from fastapi import APIRouter, Depends, HTTPException, status, Body
+
+from app.core.dependencies import get_current_student_user
+from app.services.class_service import get_enrolled_classes # type: ignore
 # Import dependencies for authorization and services later
 # from app.core import security
 # from app.models import user as user_models, chat as chat_models
@@ -26,15 +29,21 @@ async def enroll_in_class(enrollment_code: str):
     return {"message": f"Student: Enroll in class placeholder for code {enrollment_code} - requires STUDENT role"}
 
 @router.get("/classes")
-# async def list_my_enrolled_classes(student: user_models.User = Depends(get_current_student_user)):
-async def list_my_enrolled_classes():
-    """
-    Student endpoint to list classes they are enrolled in.
-    Requires STUDENT role.
-    """
+#async def list_my_enrolled_classes(request: Request, student: dict = Depends(get_current_student_user)):
+#    courses = get_enrolled_classes(student["username"])
+#    return template.TemplateResponse("student_classes.html", {
+#        "request": request,
+#        "courses": courses  #Wird an Template übergeben
+#    })
+
+# async def list_my_enrolled_classes():
+#"""
+    # Student endpoint to list classes they are enrolled in.
+  #  Requires STUDENT role.
+ #   """
     # TODO: Add dependency injection to verify user role is STUDENT
     # TODO: Implement logic to fetch classes the student is enrolled in
-    return {"message": "Student: List enrolled classes placeholder - requires STUDENT role"}
+ #   return {"message": "Student: List enrolled classes placeholder - requires STUDENT role"}
 
 @router.post("/chat/{class_uuid}")
 # async def chat_with_class_docs(

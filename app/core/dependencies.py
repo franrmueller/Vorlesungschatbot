@@ -1,6 +1,7 @@
 from fastapi import Depends, HTTPException, status
 from app.core.security import get_current_user
 
+# Role-based dependencies for user authorization 
 # STUDENT-only Zugriff
 async def get_current_student_user(user: dict = Depends(get_current_user)):
     if user["role"] != "STUDENT":
