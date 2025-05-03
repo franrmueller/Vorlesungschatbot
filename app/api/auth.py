@@ -14,11 +14,9 @@ async def register_student(user_data: user_models.UserCreate):
     """
     Endpoint for student self-registration.
     """
-    logger.info(f"Attempting registration for user: {user_data.username}")
     # Ensure role is STUDENT for self-registration if not explicitly set otherwise
     if not user_data.role or user_data.role.upper() != "STUDENT":
-        user_data.role = "STUDENT" # Enforce student role for this endpoint
-
+        user_data.role = "STUDENT"
     new_user = await auth_service.create_user(user_data=user_data)
     if not new_user:
         logger.warning(f"Registration failed for {user_data.username}, likely username exists.")
@@ -26,7 +24,8 @@ async def register_student(user_data: user_models.UserCreate):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Username already registered or error during creation."
         )
-    logger.info(f"User {new_user.username} registered successfully.")
+    # Remove duplicate warning and log structured user information
+    logger.info(f"User {new_user.username} registered successfully with role: {new_user.role}")
     # Return the created user details (excluding password hash)
     return new_user
 
@@ -44,7 +43,6 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         logger.warning(f"Login failed for user: {form_data.username}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
 
