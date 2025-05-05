@@ -85,11 +85,11 @@ Anmelden - Vorlesungschatbot
             const data = await response.json();
  
             // Handle login success or failure
-            if (!response.ok) {
-                errorMessage.textContent = 'Ungültige E-Mail oder Passwort.';
-                errorMessage.style.display = 'block';
-                return;
-            }
+            // if (!response.ok) {
+            //     errorMessage.textContent = 'Ungültige E-Mail oder Passwort.';
+            //     errorMessage.style.display = 'block';
+            //     return;
+            // }
  
             // Save token in localStorage
             localStorage.setItem('accessToken', data.access_token);
